@@ -1,9 +1,10 @@
-Web service template plugin for Moodle 2.X
+Plugin de Web Service para Moodle 3.X
 ------------------------------------------
 
-It is a template designed as a starting point for developing third party web services.
-It includes a simple Hello World example.
+Este es un plugin que agrega el web service "local_user_get_roles", el cual retorna los roles de Moodle.
 
-To test:
-1- install the plugin in moodle/local/wstemplate/
-2- Read, setup and run moodle/local/wstemplate/client/client.php
+Fue desarrollado basándose en la siguiente documentación:
+
+https://github.com/moodlehq/moodle-local_wstemplate
+https://docs.moodle.org/dev/Web_services_API
+https://docs.moodle.org/dev/Adding_a_web_service_to_a_plugin

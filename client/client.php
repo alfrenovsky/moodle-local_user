@@ -6,12 +6,12 @@
 //
 
 /**
- * XMLRPC client for Moodle 2 - local_wstemplate
+ * XMLRPC client for Moodle 3 - local_user
  *
  * This script does not depend of any Moodle code,
  * and it can be called from a browser.
  *
- * @authorr Jerome Mouneyrac
+ * @author Leonel Leonardis
  */
 
 /// MOODLE ADMINISTRATION SETUP STEPS
@@ -22,20 +22,17 @@
 // 5- Run this script directly from your browser: you should see 'Hello, FIRSTNAME'
 
 /// SETUP - NEED TO BE CHANGED
-$token = 'dff3bc6a9368d3b0db1ef59f6760ef7c';
-$domainname = 'http://YOURMOODLE';
+$token = '791c770ad41a16ba21eebb702058cc62';
+$domainname = 'http://localhost/moodle/030503';
 
 /// FUNCTION NAME
-$functionname = 'local_wstemplate_hello_world';
-
-/// PARAMETERS
-$welcomemsg = 'Hello, ';
+$functionname = 'local_user_get_roles';
 
 ///// XML-RPC CALL
 header('Content-Type: text/plain');
-$serverurl = $domainname . '/webservice/xmlrpc/server.php'. '?wstoken=' . $token;
+$serverurl = $domainname . '/webservice/rest/server.php?moodlewsrestformat=json'. '&wstoken=' . $token;
 require_once('./curl.php');
 $curl = new curl;
-$post = xmlrpc_encode_request($functionname, array($welcomemsg));
+$post = xmlrpc_encode_request($functionname, array());
 $resp = xmlrpc_decode($curl->post($serverurl, $post));
 print_r($resp);

@@ -16,10 +16,10 @@
 
 /**
  * Web service template plugin related strings
- * @package   localwstemplate
+ * @package   localuser
  * @copyright 2011 Moodle Pty Ltd (http://moodle.com)
- * @author    Jerome Mouneyrac
+ * @author    Leonel Leonardis
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['pluginname'] = 'Web service template';
+$string['pluginname'] = 'Roles WS Plugin (SIU)';

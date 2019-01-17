@@ -16,58 +16,78 @@
 /**
  * External Web Service Template
  *
- * @package    localwstemplate
+ * @package    localuser
  * @copyright  2011 Moodle Pty Ltd (http://moodle.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 require_once($CFG->libdir . "/externallib.php");
 
-class local_wstemplate_external extends external_api {
+class local_user_external extends external_api {
 
     /**
-     * Returns description of method parameters
+     * Returns description of get_roles() parameters.
+     *
      * @return external_function_parameters
+     * @since Moodle 2.5
      */
-    public static function hello_world_parameters() {
-        return new external_function_parameters(
-                array('welcomemessage' => new external_value(PARAM_TEXT, 'The welcome message. By default it is "Hello world,"', VALUE_DEFAULT, 'Hello world, '))
+    public static function get_roles_parameters() {
+		return new external_function_parameters(
+            array(
+               //if I had any parameters, they would be described here. But I don't have any, so this array is empty.
+            )
         );
     }
 
     /**
-     * Returns welcome message
-     * @return string welcome message
+     * Get roles
+     *
+     * @return array list of roles
+     * @since Moodle 2.3
      */
-    public static function hello_world($welcomemessage = 'Hello world, ') {
-        global $USER;
-
-        //Parameter validation
-        //REQUIRED
-        $params = self::validate_parameters(self::hello_world_parameters(),
-                array('welcomemessage' => $welcomemessage));
-
-        //Context validation
-        //OPTIONAL but in most web service it should present
-        $context = get_context_instance(CONTEXT_USER, $USER->id);
-        self::validate_context($context);
-
-        //Capability checking
-        //OPTIONAL but in most web service it should present
-        if (!has_capability('moodle/user:viewdetails', $context)) {
-            throw new moodle_exception('cannotviewprofile');
-        }
-
-        return $params['welcomemessage'] . $USER->firstname ;;
+    public static function get_roles() {
+        
+		// Check access permissions.
+		$systemcontext = context_system::instance();
+		require_capability('moodle/role:manage', $systemcontext);
+		
+		// Get some basic data we are going to need.
+		$roles = role_fix_names(get_all_roles(), $systemcontext, ROLENAME_ORIGINAL);
+		
+		$json = [];
+		
+		foreach ($roles as $role) {
+			
+			$json[] = [
+				'id'			=> $role->id,
+				'localname'		=> $role->localname,
+				'shortname'		=> $role->shortname,
+				'description'	=> utf8_encode(role_get_description($role)),
+			];
+			
+		}
+		
+		return $json;
     }
 
     /**
      * Returns description of method result value
+     *
      * @return external_description
+     * @since Moodle 2.3
      */
-    public static function hello_world_returns() {
-        return new external_value(PARAM_TEXT, 'The welcome message + user first name');
-    }
-
-
+    public static function get_roles_returns() {
+		
+		return new external_multiple_structure(
+            new external_single_structure(
+                array(
+                    'id'			=> new external_value(PARAM_INT, 'Rol id'),
+					'localname'		=> new external_value(PARAM_TEXT, 'Rol localname'),
+					'shortname'		=> new external_value(PARAM_TEXT, 'Rol shortname'),
+					'description'	=> new external_value(PARAM_RAW, 'Rol description', VALUE_OPTIONAL),
+                ), 'List of roles'
+            )
+        );
+		
+	}
 
 }
