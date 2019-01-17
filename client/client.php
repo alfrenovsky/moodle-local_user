@@ -22,8 +22,8 @@
 // 5- Run this script directly from your browser: you should see 'Hello, FIRSTNAME'
 
 /// SETUP - NEED TO BE CHANGED
-$token = '791c770ad41a16ba21eebb702058cc62';
-$domainname = 'http://localhost/moodle/030503';
+$token = 'dff3bc6a9368d3b0db1ef59f6760ef7c';
+$domainname = 'http://YOURMOODLE';
 
 /// FUNCTION NAME
 $functionname = 'local_user_get_roles';
