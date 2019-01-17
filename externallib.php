@@ -61,7 +61,7 @@ class local_user_external extends external_api {
 				'id'			=> $role->id,
 				'localname'		=> $role->localname,
 				'shortname'		=> $role->shortname,
-				'description'	=> utf8_encode(role_get_description($role)),
+				'description'	=> role_get_description($role),
 			];
 			
 		}
