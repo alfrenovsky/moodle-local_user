@@ -1,5 +1,6 @@
 <?php
-
+// This file is part of Moodle - http://moodle.org/
+//
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
@@ -14,30 +15,32 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Web service local plugin template external functions and service definitions.
+ * Definición de funciones externas y servicios preconfigurados de local_user.
  *
- * @package    localuser
+ * @package    local_user
  * @copyright  2019 Leonel Leonardis
+ * @copyright  2026 Alfrenovsky
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-// We defined the web service functions to install.
-$functions = array(
-        'local_user_get_roles' => array(
-                'classname'   => 'local_user_external',
-                'methodname'  => 'get_roles',
-                'classpath'   => 'local/user/externallib.php',
-                'description' => 'Return list of roles',
-                'type'        => 'read',
-				'capabilities' => 'moodle/role:manage',
-        )
-);
+defined('MOODLE_INTERNAL') || die();
 
-// We define the services to install as pre-build services. A pre-build service is not editable by administrator.
-$services = array(
-        'userservice' => array(
-                'functions' => array ('local_user_get_roles'),
-                'restrictedusers' => 0,
-                'enabled'=>1,
-        )
-);
+// Funciones de servicio web expuestas por el plugin.
+$functions = [
+    'local_user_get_roles' => [
+        'classname' => 'local_user\external\get_roles',
+        'methodname' => 'execute',
+        'description' => 'Return list of roles',
+        'type' => 'read',
+        'capabilities' => 'moodle/role:manage',
+    ],
+];
+
+// Servicios preconfigurados instalados automáticamente con el plugin.
+$services = [
+    'userservice' => [
+        'functions' => ['local_user_get_roles'],
+        'restrictedusers' => 0,
+        'enabled' => 1,
+    ],
+];

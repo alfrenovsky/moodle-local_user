@@ -15,11 +15,16 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Web service template plugin related strings
- * @package   localuser
- * @copyright 2011 Moodle Pty Ltd (http://moodle.com)
- * @author    Leonel Leonardis
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * Cadenas de idioma en inglés para el plugin local_user.
+ *
+ * @package    local_user
+ * @copyright  2019 Leonel Leonardis
+ * @copyright  2026 Alfrenovsky
+ * @author     Leonel Leonardis
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die();
+
 $string['pluginname'] = 'Roles WS Plugin (SIU)';
+$string['privacy:metadata'] = 'The Roles WS Plugin (SIU) plugin does not store any personal data.';
