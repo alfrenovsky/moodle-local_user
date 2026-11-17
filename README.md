@@ -1,6 +1,10 @@
 # local_user
 
-Plugin local de Moodle que expone el servicio web `local_user_get_roles` (y el servicio preconfigurado `userservice`) para obtener el listado de roles de Moodle (`id`, `localname`, `shortname`, `description`).
+Plugin local de Moodle (**Roles WS Plugin (SIU)**) desarrollado originalmente para la integración entre **SIU-Guaraní** y **Moodle**.
+
+## Propósito
+
+Moodle no incluye de forma nativa en su API de servicios web una función para listar los roles definidos en la plataforma. Este plugin expone el servicio web `local_user_get_roles` (y el servicio preconfigurado `userservice`) para que **SIU-Guaraní** pueda consultar los roles de Moodle (`id`, `localname`, `shortname`, `description`) y mapear perfiles académicos (como *Docente* o *Alumno*) durante la sincronización de comisiones, cursos y matriculaciones.
 
 ## Compatibilidad
 
