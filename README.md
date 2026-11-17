@@ -13,11 +13,22 @@ Moodle no incluye de forma nativa en su API de servicios web una función para l
 
 ## Instalación
 
+### Opción 1: Desde un Release en GitHub (recomendado)
+
+1. Descargar el archivo `local_user-v*.zip` desde la sección de [Releases](https://github.com/alfrenovsky/moodle-local_user/releases) *(no descargar `Source code (zip)`, ya que ese archivo no tiene la carpeta raíz `user/` que exige Moodle)*.
+2. En Moodle, ir a **Administración del sitio > Extensiones** (o **Plugins**, según la traducción) **> Instalar complemento** (*Site administration > Plugins > Install plugins*).
+3. Subir el archivo ZIP descargado y continuar con el asistente para completar la actualización de la base de datos.
+
+### Opción 2: Instalación manual
+
 1. Copiar el contenido del repositorio en `local/user` dentro de la instalación de Moodle.
 2. Acceder a **Administración del sitio > Notificaciones** para completar la instalación o actualización.
-3. Habilitar los servicios web en **Administración del sitio > Características avanzadas**.
-4. Habilitar el protocolo **REST** en **Administración del sitio > Servidor > Servicios web > Gestionar protocolos**.
-5. Generar un token para un usuario con la capacidad `moodle/role:manage` asociado al servicio `userservice`.
+
+### Configuración de servicios web
+
+1. Habilitar los servicios web (`enablewebservices`) en **Administración del sitio > Características avanzadas** (`/admin/settings.php?section=optionalsubsystems`).
+2. Habilitar el protocolo **REST** en **Administración del sitio > Servidor > Servicios web > Gestionar protocolos** *(en Moodle 3.11: **Extensiones > Servicios web > Gestionar protocolos**)*.
+3. Generar un token en **Administración del sitio > Servidor > Servicios web > Gestionar tokens** (`/admin/webservice/tokens.php`) *(en Moodle 3.11: **Extensiones > Servicios web > Gestionar tokens**)* haciendo clic en **Crear token**, eligiendo un usuario con la capacidad `moodle/role:manage` y el servicio `userservice`.
 
 ## Ejemplo de uso (REST + JSON)
 
